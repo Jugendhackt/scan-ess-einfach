@@ -34,7 +34,9 @@ def writehtml(info):
 						<header>
 							<span class="avatar"><img src="/images/barcode_scanner.png" alt="" /></span>
 							<h1>Product-ID</h1>
-							<p>%s</p>						
+							<p>%s</br>%s</br></p>
+                            <h1>Zutaten</br></h1>
+                            <p>%s</br><img src="%s"></p>
 						</footer>
 					</section>
 
