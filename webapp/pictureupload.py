@@ -41,7 +41,7 @@ def writehtml(info):
 				<!-- Footer -->
 					<footer id="footer">
 						<ul class="copyright">
-							<li>&copy; by Team IssEss%s</li>
+							<li>&copy; by Team IssEss</li>
 							<li>Design: <a href="http://twitter.com">by Foz</a></li>
 						</ul>
 					</footer>
