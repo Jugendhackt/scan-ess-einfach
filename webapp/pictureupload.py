@@ -37,7 +37,7 @@ def writehtml(info):
 							<h1>Product-ID</h1>
 							<p>%s</br>%s</br></p>
                             <h1>Zutaten</br></h1>
-                            <p>%s</br><h1>Sonstiges</h1></br>%s<hr><img src="%s"></p>
+                            <p>%s</br><h1>Sonstiges</h1></br>%s</br><hr><img src="%s"></p>
 						</footer>
 					</section>
 
