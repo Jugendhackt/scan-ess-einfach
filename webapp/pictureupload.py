@@ -34,14 +34,14 @@ def writehtml(info):
 						<header>
 							<span class="avatar"><img src="/images/barcode_scanner.png" alt="" /></span>
 							<h1>Product-ID</h1>
-							<p>%s</p>						
+							<p>%s</br>%s</p>						
 						</footer>
 					</section>
 
 				<!-- Footer -->
 					<footer id="footer">
 						<ul class="copyright">
-							<li>&copy; by Team IssEss%s</li>
+							<li>&copy; by Team IssEss</li>
 							<li>Design: <a href="http://twitter.com">by Foz</a></li>
 						</ul>
 					</footer>
