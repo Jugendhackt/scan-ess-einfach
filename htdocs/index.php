@@ -4,6 +4,6 @@ if (isset($_COOKIE['firststart-foz'])){
 }
 else {
 	SetCookie("firststart-foz");
-	header('Location: http://100.100.205.146/fs');
+	header('Location: http://100.100.205.146/firststart');
 }
 ?>
