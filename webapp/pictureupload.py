@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#-*- coding: UTF-8 -*-
 #imports
 import csv
 import os
@@ -113,6 +114,13 @@ info['product_id']=data['product']['code']
 info['inhalte']=data['product']['ingredients_text']
 info['product_name']=data['product']['product_name']
 info['bild']=data['product']['image_front_url']
+
+usetztung = csv.reader(open('Uebersetzungstabelle2.csv','rb'))
+for row in usetztung:
+    alt=row[0].decode('utf-8')
+    neu=row[1].decode('utf-8')
+    info['inhalte']=info['inhalte'].replace(alt, neu)
+    
 
 
 if form.getvalue('as_json'):
