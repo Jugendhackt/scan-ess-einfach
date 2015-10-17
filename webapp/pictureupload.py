@@ -10,6 +10,55 @@ import json
 import urllib2
 import sys
 
+def writehtml(info):
+    print 'Content-Type: text/html\n\n'
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+    print """\
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Auswertung:</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main">
+						<header>
+							<span class="avatar"><img src="/images/barcode_scanner.png" alt="" /></span>
+							<h1>Product-ID</h1>
+							<p>%s</p>						
+						</footer>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="copyright">
+							<li>&copy; by Team IssEss%s</li>
+							<li>Design: <a href="http://twitter.com">by Foz</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+	</body>
+</html>
+""" % (info['product_id'],info['product_name'])
+
+def writejson(info):
+    print 'Content-Type: application/json\n\n'
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+    print json.dumps(info)
+    
+
 def decode(f):
 
     # create a reader
@@ -44,58 +93,26 @@ cgitb.enable()
 form = cgi.FieldStorage()
 
 
-print 'Content-Type: text/html\n\n'
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
-#get the fileitem
-fileitem=form['userfile']
-if fileitem.file:
+#get the fileitem from web user
+if form.getvalue('userfile'):
+    fileitem=form['userfile']
     #yay...we got a file
     fn = '/tmp/' + os.path.basename(fileitem.filename)
     open(fn, 'wb').write(fileitem.file.read())
     ean=decode(fn)
     os.remove(fn)
-    data = json.load(urllib2.urlopen('http://world.openfoodfacts.org/api/v0/product/' + ean +'.json'))
-    code=data['product']['code']
-    productname=data['product']['product_name']
-    inhalte=data['product']['ingredients_text']
+
+if form.getvalue('ean'):
+    ean=str(form.getvalue('ean'))
     
-    message=code + '<hr>' + inhalte
-print """\
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Auswertung:</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="/assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
-	</head>
-	<body>
+data = json.load(urllib2.urlopen('http://world.openfoodfacts.org/api/v0/product/' + ean +'.json'))
+info={}
+info['product_id']=data['product']['code']
+info['inhalte']=data['product']['ingredients_text']
+info['product_name']=data['product']['product_name']
 
-		<!-- Wrapper -->
-			<div id="wrapper">
 
-				<!-- Main -->
-					<section id="main">
-						<header>
-							<span class="avatar"><img src="/images/barcode_scanner.png" alt="" /></span>
-							<h1>Product-ID</h1>
-							<p>%s</p>						
-						</footer>
-					</section>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<ul class="copyright">
-							<li>&copy; by Team IssEss</li>
-							<li>Design: <a href="http://twitter.com">by Foz</a></li>
-						</ul>
-					</footer>
-
-			</div>
-
-	</body>
-</html>
-""" % (message,)
+if form.getvalue('as_json'):
+    writejson(info)
+else:
+    writehtml(info)
