@@ -24,7 +24,13 @@
 					<section id="main">
 						<header>
 							<span class="avatar"><img src="images/barcode_scanner.png" alt="" /></span>
-							<h1>Scan den Barcode</h1>
+							<hr>
+                                                        <form enctype="multipart/form-data"
+                                                        action="/cgi-bin/pictureupload.py" method="post">
+                                                        <p>File: <input type="file" name="userfile" /></p>
+                                                        <p><input type="submit" value="Upload" /></p>
+                                                        </form>
+                                                        <h1>Scan den Barcode</h1>
 							<p>Teile es mit deinen Freunden</p>
 						</header>
 						<!--
