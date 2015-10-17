@@ -8,6 +8,7 @@ import zbar
 import Image
 import json
 import urllib2
+import sys
 
 def decode(f):
 
@@ -42,9 +43,10 @@ cgitb.enable()
 
 form = cgi.FieldStorage()
 
-#The variables
-#httpopen=""
-#httpclose=""
+
+print 'Content-Type: text/html\n\n'
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 #get the fileitem
 fileitem=form['userfile']
@@ -55,10 +57,15 @@ if fileitem.file:
     ean=decode(fn)
     os.remove(fn)
     data = json.load(urllib2.urlopen('http://world.openfoodfacts.org/api/v0/product/' + ean +'.json'))
-    message=data
+    code=data['product']['code']
+    productname=data['product']['product_name']
+    inhalte=data['product']['ingredients_text']
+    
+    message=code + '<hr>' + inhalte
 print """\
-Content-Type: text/html\n\n
-<html><body>
+<html><head>
+<meta charset='utf-8'>
+</head><body>
 <p>%s</p><hr>
 </body></html>
 """ % (message,)

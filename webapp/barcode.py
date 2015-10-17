@@ -17,8 +17,9 @@ width, height = pil.size
 raw = pil.tostring()
 
 # wrap image data
-image = zbar.Image(width, height, 'Y800', raw)
-
+image = zbar.Image(width, height, 'GREY', raw)
+print(width)
+print(height)
 # scan the image for barcodes
 scanner.scan(image)
 
