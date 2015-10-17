@@ -63,9 +63,39 @@ if fileitem.file:
     
     message=code + '<hr>' + inhalte
 print """\
-<html><head>
-<meta charset='utf-8'>
-</head><body>
-<p>%s</p><hr>
-</body></html>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Auswertung:</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main">
+						<header>
+							<span class="avatar"><img src="/images/barcode_scanner.png" alt="" /></span>
+							<h1>Product-ID</h1>
+							<p>%s</p>						
+						</footer>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="copyright">
+							<li>&copy; by Team IssEss</li>
+							<li>Design: <a href="http://twitter.com">by Foz</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+	</body>
+</html>
 """ % (message,)
