@@ -1,6 +1,6 @@
 <?php
 if (isset($_COOKIE['firststart-foz'])){
-	header('Location: /BS');
+	header('Location: /bs');
 }
 else {
 	SetCookie("firststart-foz");
