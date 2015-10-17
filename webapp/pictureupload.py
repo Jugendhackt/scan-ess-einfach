@@ -36,7 +36,7 @@ def writehtml(info):
 							<h1>Product-ID</h1>
 							<p>%s</br>%s</br></p>
                             <h1>Zutaten</br></h1>
-                            <p>%s</br><img src="%s"></p>
+                            <p>%s</br><hr><img src="%s"></p>
 						</footer>
 					</section>
 
@@ -52,7 +52,7 @@ def writehtml(info):
 
 	</body>
 </html>
-""" % (info['product_id'],info['product_name'],info['inhalte'])
+""" % (info['product_id'],info['product_name'],info['inhalte'],info['bild'])
 
 def writejson(info):
     print 'Content-Type: application/json\n\n'
@@ -112,6 +112,7 @@ info={}
 info['product_id']=data['product']['code']
 info['inhalte']=data['product']['ingredients_text']
 info['product_name']=data['product']['product_name']
+info['bild']=data['product']['image_front_url']
 
 
 if form.getvalue('as_json'):
