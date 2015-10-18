@@ -26,10 +26,8 @@ def writehtml(info):
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 	</head>
 	<body>
-
 		<!-- Wrapper -->
 			<div id="wrapper">
-
 				<!-- Main -->
 					<section id="main">
 						<header>
@@ -37,23 +35,20 @@ def writehtml(info):
 							<h1>Product-ID</h1>
 							<p>%s</br>%s</br></p>
                             <h1>Zutaten</br></h1>
-                            <p>%s</br><hr><img src="%s"></p>
+                            <p>%s</br><h1>Sonstiges</h1></br>%s</br><hr><img src="%s"></p>
 						</footer>
 					</section>
-
 				<!-- Footer -->
 					<footer id="footer">
 						<ul class="copyright">
 							<li>&copy; by Team IssEss</li>
-							<li>Design: <a href="http://twitter.com">by Foz</a></li>
+							<li>Design: <a href="http://twitter.com/3zscan">by Foz</a></li>
 						</ul>
 					</footer>
-
 			</div>
-
 	</body>
 </html>
-""" % (info['product_id'],info['product_name'],info['inhalte'],info['bild'])
+""" % (info['product_id'],info['product_name'],info['inhalte'],info['sonstiges'],info['bild'])
 
 def writejson(info):
     print 'Content-Type: application/json\n\n'
@@ -72,6 +67,7 @@ def decode(f):
 
     # obtain image data
     pil = Image.open(f).convert('L')
+    pil = pil.resize((1000,1000))
     width, height = pil.size
     raw = pil.tostring()
 
@@ -114,6 +110,7 @@ info['product_id']=data['product']['code']
 info['inhalte']=data['product']['ingredients_text']
 info['product_name']=data['product']['product_name']
 info['bild']=data['product']['image_front_url']
+info['sonstiges']=data['product']['labels_hierarchy']
 
 usetztung = csv.reader(open('Uebersetzungstabelle2.csv','rb'))
 for row in usetztung:
