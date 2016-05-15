@@ -1,4 +1,2 @@
 # scan-ess-einfach
-Das ist unser Scan es einfach Projekt.
-Wir wollen eine Webanwendung programmieren, die einem sagt, was in einem
-bestimmten Lebensmittel drin ist. UND ZWAR NICHT IN FACHWÖRTERN!
+Wir alle kennen das, wir stehen im Supermarkt vor einem Produkt, schauen auf die Inhaltsstoffe und können sie trotzdem nicht verstehen. Hier hilft uner scan-es(s)-einfach Projekt weiter! Mit unserer Web-App (http://scanesseinfach.de) könnt ihr einfach ein Foto von dem Barcode machen, und unsere Web-App durchsucht eine Datenbank mit (fast) allen Lebensmitteln und übersetzt schließlich die ganzen Inhaltsstoffe in ein verständlichereres Deutsch. Klingt einfach, ist es auch :)
